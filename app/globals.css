@@ -1,3 +1,6 @@
+@import url("https://school.profuturo.education/theme/yui_combo.php?3.17.2/cssreset/cssreset-min.css&3.17.2/cssfonts/cssfonts-min.css&3.17.2/cssgrids/cssgrids-min.css&3.17.2/cssbase/cssbase-min.css");
+@import url("https://school.profuturo.education/theme/yui_combo.php?rollup/3.17.2/yui-moodlesimple-min.css");
+@import url("https://school.profuturo.education/theme/styles.php/profuturo_base/1746625818_1722836368/all");
 @import "tailwindcss";
 
 :root {
@@ -12,15 +15,69 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('/fontawesome-webfont.woff2') format('woff2'),
+       url('/fontawesome-webfont.woff') format('woff'),
+       url('/fontawesome-webfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scrollbar when drawer is open */
+  padding-top: 56px !important; /* Add padding to account for fixed navbar */
+  position: relative; /* Ensure padding-top is applied correctly */
+}
+
+/* Make the "Code" label black */
+label[for="id_code"] {
+  color: black !important; /* Using !important to ensure override */
+}
+
+/* Drawer styles */
+#nav-drawer {
+  position: fixed;
+  top: 56px; /* Height of the navbar */
+  transform: translateX(-100%);
+  width: 250px;
+  height: calc(100% - 56px); /* Full height minus navbar */
+  background-color: #f2f2f2; /* Background for the drawer */
+  transition: transform 0.3s ease-in-out;
+  z-index: 10; /* Below navbar */
+  border-right: 1px solid #e5e7eb; /* Add a border to the right of the drawer */
+  overflow-y: auto; /* Enable vertical scrolling for drawer content */
+}
+
+.navbar {
+  z-index: 20; /* Above drawer */
+}
+
+#nav-drawer.open {
+  transform: translateX(0);
+}
+
+/* Page content shift when drawer is open */
+#page-wrapper {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+#page-wrapper.drawer-open,
+#page-footer.drawer-open,
+.navbar.drawer-open {
+  margin-left: 250px; /* Shift content to the right */
+}
+
+#page-footer {
+  transition: margin-left 0.3s ease-in-out;
 }
